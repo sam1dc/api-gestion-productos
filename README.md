@@ -2,105 +2,48 @@
 
 API RESTful desarrollada con **Laravel 12** para la gestión de productos con soporte para múltiples divisas. Diseñada bajo arquitectura limpia y principios **SOLID**.
 
-* 🌐 **Demo en Producción (Render):** [https://api-gestion-productos-9bgj.onrender.com](https://api-gestion-productos-9bgj.onrender.com)
-* 📖 **Documentación Swagger UI en Vivo:** [https://api-gestion-productos-9bgj.onrender.com/api/documentation](https://api-gestion-productos-9bgj.onrender.com/api/documentation)
-*(También disponible localmente en `http://localhost:8000/api/documentation`)*
+---
+
+## 🚀 Acceso en Vivo (Producción - Render)
+
+La API y su documentación interactiva se encuentran **desplegadas en la nube y 100% operativas**. No es necesario instalar ni configurar nada localmente para probarla:
+
+* 📖 **Documentación Interactiva Swagger UI:**  
+  👉 **[https://api-gestion-productos-9bgj.onrender.com/api/documentation](https://api-gestion-productos-9bgj.onrender.com/api/documentation)**  
+  *(Permite probar todos los endpoints en vivo con el botón "Try it out" y ver respuestas reales).*
+
+* 🌐 **URL Base de la API:**  
+  `https://api-gestion-productos-9bgj.onrender.com/api`
 
 ---
 
-## ⚙️ Requisitos
+## 📂 Formatos de Documentación Disponibles
 
-* **PHP** >= 8.2 (con extensiones pdo, pdo_sqlite o pdo_mysql)
-* **Composer** >= 2.x
-* **SQLite** (por defecto) o **MySQL / MariaDB** (ej. XAMPP)
+Para facilitar la revisión en cualquiera de las herramientas solicitadas, se proporcionan:
 
----
+1. **Swagger / OpenAPI 3.0 (En Vivo):**  
+   - Interfaz web interactiva: [https://api-gestion-productos-9bgj.onrender.com/api/documentation](https://api-gestion-productos-9bgj.onrender.com/api/documentation)  
+   - Especificación OpenAPI JSON: [https://api-gestion-productos-9bgj.onrender.com/docs/api-docs.json](https://api-gestion-productos-9bgj.onrender.com/docs/api-docs.json) *(o archivo en repo: [`storage/api-docs/api-docs.json`](storage/api-docs/api-docs.json))*.
 
-## 🚀 Instalación y Configuración
+2. **Colección Postman / Insomnia (JSON):**  
+   - Archivo listo para importar: [`postman_collection.json`](postman_collection.json) *(incluye todos los endpoints con payloads de prueba y variable de entorno `baseUrl` preconfigurada hacia Render)*.
 
-```bash
-# 1. Clonar el repositorio y entrar a la carpeta
-git clone https://github.com/sam1dc/api-gestion-productos.git
-cd api-gestion-productos
-
-# 2. Instalar dependencias
-composer install
-
-# 3. Configurar archivo de entorno y generar clave
-cp .env.example .env
-php artisan key:generate
-```
-
-### Configuración de Base de Datos (Elige una opción):
-
-#### 🔹 Opción A: SQLite (Recomendada - Sin configuración externa)
-No requiere instalar ni abrir ningún servidor de base de datos:
-```bash
-# Crear el archivo de base de datos
-touch database/database.sqlite
-
-# Ejecutar migraciones y poblar datos iniciales
-php artisan migrate --seed
-```
-*(El archivo `.env` ya viene configurado con `DB_CONNECTION=sqlite` por defecto)*.
-
-#### 🔹 Opción B: MySQL / MariaDB (XAMPP)
-1. Inicia **MySQL** en el panel de control de XAMPP.
-2. Crea la base de datos `api_gestion_productos` (o desde phpMyAdmin en `http://localhost/phpmyadmin`).
-3. Modifica tu archivo `.env`:
-   ```dotenv
-   DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=api_gestion_productos
-   DB_USERNAME=root
-   DB_PASSWORD=
-   ```
-4. Ejecuta migraciones y datos de prueba:
-   ```bash
-   php artisan migrate --seed
-   ```
+3. **Documento Técnico:**  
+   - Este archivo `README.md` con la arquitectura, principios SOLID y catálogo de endpoints.
 
 ---
 
-## 🖥️ Ejecución del Servidor
+## 📡 Catálogo de Endpoints
 
-```bash
-php artisan serve --port=8000
-```
-
-* **API Base:** `http://localhost:8000/api`
-* **Swagger UI:** `http://localhost:8000/api/documentation` *(o visitando directamente `http://localhost:8000`)*
-
----
-
-## ☁️ Despliegue en Render (con Docker)
-
-El proyecto incluye configuración lista para desplegar en [Render.com](https://render.com):
-
-1. En Render, selecciona **New +** > **Web Service**.
-2. Conecta tu repositorio de GitHub: `sam1dc/api-gestion-productos`.
-3. Render detectará automáticamente el **`Dockerfile`**.
-4. Haz clic en **Deploy Web Service** (Plan Free).
-
-El contenedor se encargará automáticamente de:
-- Escuchar en el puerto dinámico de Render (`$PORT`).
-- Crear e inicializar la base de datos SQLite con sus tablas y datos de prueba (`migrate --seed`).
-- Servir la API y la documentación **Swagger UI** pública y lista para probar.
-
----
-
-## 📡 Endpoints de la API
-
-Todos los endpoints retornan datos en formato **JSON**.
+Todos los endpoints retornan respuestas estandarizadas en formato **JSON**.
 
 | Método | Endpoint | Descripción | Parámetros Query / Body |
 |:---:|---|---|---|
 | `GET` | `/api/currencies` | Listar catálogo de divisas y tasas de cambio | - |
-| `GET` | `/api/products` | Listar productos paginados | `?page=1&per_page=15` |
-| `POST` | `/api/products` | Crear un producto con su divisa base | `name`, `price`, `currency_id`, `description`, `tax_cost`, `manufacturing_cost` |
+| `GET` | `/api/products` | Listar productos con paginación | `?page=1&per_page=15` |
+| `POST` | `/api/products` | Crear un producto en su divisa base | `name`, `price`, `currency_id`, `description`, `tax_cost`, `manufacturing_cost` |
 | `GET` | `/api/products/{id}` | Obtener detalle de un producto por ID | - |
-| `PUT` | `/api/products/{id}` | Actualizar datos de un producto | Campos a modificar (`name`, `price`, etc.) |
+| `PUT` | `/api/products/{id}` | Actualizar datos de un producto | Campos a actualizar (`name`, `price`, etc.) |
 | `DELETE` | `/api/products/{id}` | Eliminar lógicamente un producto (Soft Delete) | - |
 | `GET` | `/api/products/{id}/prices` | Listar precios del producto en distintas divisas | - |
 | `POST` | `/api/products/{id}/prices` | Registrar o actualizar precio en una divisa | `currency_id`, `price` |
@@ -111,9 +54,9 @@ Todos los endpoints retornan datos en formato **JSON**.
 
 | Principio | Aplicación en el Proyecto |
 |---|---|
-| **S - Single Responsibility** | Capas desacopladas: **FormRequests** (validación), **Controllers** (HTTP), **Services** (lógica de negocio), **Repositories** (acceso Eloquent), **Resources** (transformación JSON). |
-| **O - Open/Closed** | Nuevos métodos de consulta o almacenes de datos se integran mediante interfaces sin alterar la lógica existente. |
-| **L - Liskov Substitution** | `ProductRepository` y `ProductPriceRepository` cumplen al 100% los contratos de sus interfaces, permitiendo sustituciones limpias. |
+| **S - Single Responsibility** | Capas estrictamente desacopladas: **FormRequests** (validación y 422), **Controllers** (HTTP), **Services** (reglas de negocio), **Repositories** (acceso a base de datos con Eloquent), **Resources** (transformación JSON). |
+| **O - Open/Closed** | El sistema es extensible mediante interfaces sin modificar los controladores o servicios existentes. |
+| **L - Liskov Substitution** | `ProductRepository` y `ProductPriceRepository` cumplen rigurosamente los contratos de sus interfaces, permitiendo sustituciones transparentes. |
 | **I - Interface Segregation** | Interfaces divididas y cohesivas: `ProductRepositoryInterface` y `ProductPriceRepositoryInterface`. |
 | **D - Dependency Inversion** | Controladores y Servicios dependen de abstracciones (interfaces inyectadas mediante `RepositoryServiceProvider`). |
 
@@ -127,4 +70,40 @@ El proyecto cuenta con una suite completa de pruebas funcionales automatizadas:
 php artisan test
 ```
 
-Verifica creación, lectura, actualización, eliminación lógica, validaciones (código 422), gestión de precios multi-divisa y paginación.
+```text
+PASS  Tests\Feature\ProductApiTest
+✓ can list products
+✓ can paginate products with page and per page
+✓ can create product
+✓ validation fails when currency id is missing
+✓ can show product
+✓ can update product
+✓ can soft delete product
+✓ can manage product prices in different currencies
+✓ can list currencies
+```
+
+---
+
+## 💻 Ejecución Local (Opcional)
+
+Si deseas clonar y ejecutar el proyecto en tu máquina local:
+
+```bash
+# 1. Clonar e instalar dependencias
+git clone https://github.com/sam1dc/api-gestion-productos.git
+cd api-gestion-productos
+composer install
+
+# 2. Configurar entorno y generar APP_KEY
+cp .env.example .env
+php artisan key:generate
+
+# 3. Base de datos SQLite (recomendada - sin configuración externa)
+touch database/database.sqlite
+php artisan migrate --seed
+
+# 4. Iniciar servidor local
+php artisan serve
+```
+*Swagger local: `http://localhost:8000/api/documentation`*

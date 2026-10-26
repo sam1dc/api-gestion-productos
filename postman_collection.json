@@ -1,0 +1,203 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+		"name": "API Gestión de Productos (Laravel 12)",
+		"description": "Colección oficial de endpoints para la prueba técnica de API RESTful con Laravel 12 y principios SOLID.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://api-gestion-productos-9bgj.onrender.com",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Divisas",
+			"item": [
+				{
+					"name": "Listar Divisas",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/currencies",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "currencies"]
+						},
+						"description": "Obtiene el catálogo de divisas registradas con sus símbolos y tasas de cambio."
+					}
+				}
+			]
+		},
+		{
+			"name": "Productos",
+			"item": [
+				{
+					"name": "1. Listar Productos (Paginado)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/products?page=1&per_page=15",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "products"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "15"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "2. Crear Producto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Laptop Pro X2\",\n  \"description\": \"Laptop de alto rendimiento con 32GB RAM y 1TB SSD\",\n  \"price\": 1299.99,\n  \"currency_id\": 1,\n  \"tax_cost\": 150.00,\n  \"manufacturing_cost\": 350.00\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/products",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "products"]
+						}
+					}
+				},
+				{
+					"name": "3. Obtener Producto por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/products/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "products", "1"]
+						}
+					}
+				},
+				{
+					"name": "4. Actualizar Producto",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Laptop Pro X2 v2\",\n  \"price\": 1399.99,\n  \"tax_cost\": 165.00\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/products/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "products", "1"]
+						}
+					}
+				},
+				{
+					"name": "5. Eliminar Producto (Soft Delete)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/products/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "products", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Precios de Productos",
+			"item": [
+				{
+					"name": "1. Listar Precios de un Producto",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/products/1/prices",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "products", "1", "prices"]
+						}
+					}
+				},
+				{
+					"name": "2. Crear o Actualizar Precio en Divisa",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"currency_id\": 2,\n  \"price\": 1195.50\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/products/1/prices",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "products", "1", "prices"]
+						}
+					}
+				}
+			]
+		}
+	]
+}
