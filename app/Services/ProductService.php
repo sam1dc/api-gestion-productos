@@ -20,9 +20,9 @@ class ProductService
     /**
      * Obtener listado paginado de productos.
      */
-    public function getAll(int $perPage = 15): LengthAwarePaginator
+    public function getAll(int $perPage = 15, ?int $page = null): LengthAwarePaginator
     {
-        return $this->productRepository->getAll($perPage);
+        return $this->productRepository->getAll($perPage, $page);
     }
 
     /**

@@ -59,9 +59,19 @@
                 "operationId": "d97d1c3727cbac49708b85f7d11f7d58",
                 "parameters": [
                     {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Número de página a consultar (por defecto: 1)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
                         "name": "per_page",
                         "in": "query",
-                        "description": "Número de resultados por página",
+                        "description": "Número de resultados por página (por defecto: 15)",
                         "required": false,
                         "schema": {
                             "type": "integer",

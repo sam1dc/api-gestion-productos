@@ -24,10 +24,17 @@ class ProductController extends Controller
         tags: ['Productos'],
         parameters: [
             new OA\Parameter(
+                name: 'page',
+                in: 'query',
+                required: false,
+                description: 'Número de página a consultar (por defecto: 1)',
+                schema: new OA\Schema(type: 'integer', default: 1)
+            ),
+            new OA\Parameter(
                 name: 'per_page',
                 in: 'query',
                 required: false,
-                description: 'Número de resultados por página',
+                description: 'Número de resultados por página (por defecto: 15)',
                 schema: new OA\Schema(type: 'integer', default: 15)
             ),
         ],
@@ -47,8 +54,9 @@ class ProductController extends Controller
     )]
     public function index(Request $request): AnonymousResourceCollection
     {
-        $perPage  = (int) $request->query('per_page', 15);
-        $products = $this->productService->getAll($perPage);
+        $perPage = (int) $request->query('per_page', 15);
+        $page    = $request->has('page') ? (int) $request->query('page') : null;
+        $products = $this->productService->getAll($perPage, $page);
 
         return ProductResource::collection($products);
     }

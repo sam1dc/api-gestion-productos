@@ -10,7 +10,7 @@ interface ProductRepositoryInterface
     /**
      * Obtener todos los productos paginados.
      */
-    public function getAll(int $perPage = 15): LengthAwarePaginator;
+    public function getAll(int $perPage = 15, ?int $page = null): LengthAwarePaginator;
 
     /**
      * Encontrar un producto por su ID.

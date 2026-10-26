@@ -172,7 +172,7 @@ La API estará disponible en: `http://localhost:8000/api`
 
 | Método | Endpoint | Descripción |
 |--------|----------|-------------|
-| `GET` | `/api/products` | Listar productos (paginado) |
+| `GET` | `/api/products` | Listar productos paginados (parámetros opcionales: `?page=1&per_page=15`) |
 | `POST` | `/api/products` | Crear un nuevo producto |
 | `GET` | `/api/products/{id}` | Obtener un producto por ID |
 | `PUT` | `/api/products/{id}` | Actualizar un producto |

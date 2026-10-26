@@ -38,6 +38,18 @@ class ProductApiTest extends TestCase
             ]);
     }
 
+    public function test_can_paginate_products_with_page_and_per_page(): void
+    {
+        Product::factory()->count(5)->create(['currency_id' => 1]);
+
+        $response = $this->getJson('/api/products?per_page=2&page=2');
+
+        $response->assertStatus(200)
+            ->assertJsonPath('meta.current_page', 2)
+            ->assertJsonPath('meta.per_page', 2)
+            ->assertJsonCount(2, 'data');
+    }
+
     public function test_can_create_product(): void
     {
         $payload = [
