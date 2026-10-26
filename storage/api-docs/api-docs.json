@@ -565,14 +565,6 @@
                 },
                 "type": "object"
             }
-        },
-        "securitySchemes": {
-            "bearerAuth": {
-                "type": "http",
-                "description": "Autenticación mediante token Bearer JWT",
-                "bearerFormat": "JWT",
-                "scheme": "bearer"
-            }
         }
     },
     "tags": [

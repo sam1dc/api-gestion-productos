@@ -21,13 +21,6 @@ use OpenApi\Attributes as OA;
     url: L5_SWAGGER_CONST_HOST,
     description: 'Servidor local de desarrollo'
 )]
-#[OA\SecurityScheme(
-    securityScheme: 'bearerAuth',
-    type: 'http',
-    scheme: 'bearer',
-    bearerFormat: 'JWT',
-    description: 'Autenticación mediante token Bearer JWT'
-)]
 class OpenApiSpec
 {
     // Este archivo solo define la especificación OpenAPI global.
