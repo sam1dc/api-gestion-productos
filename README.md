@@ -2,7 +2,9 @@
 
 API RESTful desarrollada con **Laravel 12** para la gestión de productos con soporte para múltiples divisas. Diseñada bajo arquitectura limpia y principios **SOLID**.
 
-Documentación interactiva disponible en **Swagger UI**: [http://localhost:8000/api/documentation](http://localhost:8000/api/documentation)
+* 🌐 **Demo en Producción (Render):** [https://api-gestion-productos-9bgj.onrender.com](https://api-gestion-productos-9bgj.onrender.com)
+* 📖 **Documentación Swagger UI en Vivo:** [https://api-gestion-productos-9bgj.onrender.com/api/documentation](https://api-gestion-productos-9bgj.onrender.com/api/documentation)
+*(También disponible localmente en `http://localhost:8000/api/documentation`)*
 
 ---
 
