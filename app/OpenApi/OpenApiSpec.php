@@ -18,8 +18,8 @@ use OpenApi\Attributes as OA;
     )
 )]
 #[OA\Server(
-    url: L5_SWAGGER_CONST_HOST,
-    description: 'Servidor local de desarrollo'
+    url: '/',
+    description: 'Servidor de la API (Local o Producción)'
 )]
 class OpenApiSpec
 {

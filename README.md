@@ -72,6 +72,22 @@ php artisan serve --port=8000
 
 ---
 
+## ☁️ Despliegue en Render (con Docker)
+
+El proyecto incluye configuración lista para desplegar en [Render.com](https://render.com):
+
+1. En Render, selecciona **New +** > **Web Service**.
+2. Conecta tu repositorio de GitHub: `sam1dc/api-gestion-productos`.
+3. Render detectará automáticamente el **`Dockerfile`**.
+4. Haz clic en **Deploy Web Service** (Plan Free).
+
+El contenedor se encargará automáticamente de:
+- Escuchar en el puerto dinámico de Render (`$PORT`).
+- Crear e inicializar la base de datos SQLite con sus tablas y datos de prueba (`migrate --seed`).
+- Servir la API y la documentación **Swagger UI** pública y lista para probar.
+
+---
+
 ## 📡 Endpoints de la API
 
 Todos los endpoints retornan datos en formato **JSON**.
