@@ -14,14 +14,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Habilitar mod_rewrite de Apache para rutas de Laravel
 RUN a2enmod rewrite
 
-# Configurar Apache para apuntar a la carpeta /public de Laravel
-ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
-    && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
-    && echo "<Directory /var/www/html/public>\n\
-    AllowOverride All\n\
-    Require all granted\n\
-</Directory>" >> /etc/apache2/apache2.conf
+# Configurar Apache con el archivo dedicado
+COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
 
 # Instalar Composer desde la imagen oficial
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
